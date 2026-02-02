@@ -3,12 +3,19 @@ using BaseTemplate.Core.Repository;
 using BaseTemplate.Data.Contexts;
 using BaseTemplate.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options => {
+    options.Filters.Add(new ResponseCacheAttribute {
+        Location = ResponseCacheLocation.None,
+        NoStore = true
+    });
+});
+
 builder.Services.AddScoped<IWorkUnit, WorkUnit>();
 
 var connectionString = builder.Configuration.GetConnectionString("ConexionSQL") ?? 

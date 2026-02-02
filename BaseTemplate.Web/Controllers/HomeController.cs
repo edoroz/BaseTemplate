@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace BaseTemplate.Web.Controllers
 {
     [Authorize]
-    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
