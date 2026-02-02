@@ -65,4 +65,40 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+using(var scope = app.Services.CreateScope()) {
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<RoleModel>>();
+    string roleName = "System";
+    if(!await roleManager.RoleExistsAsync(roleName)) {
+        RoleModel role = new ();
+        role.Name = roleName;
+        await roleManager.CreateAsync(role);
+    }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<UserModel>>();
+    string userName = "System";
+    string password = "Temporary01+";
+    string firsName = "Default";
+    string lasName  = "Default";
+    string roleName = "System";
+    if (await userManager.FindByNameAsync(userName) == null)
+    {
+        UserModel user = new UserModel();
+        user.UserName  = userName;
+        user.FirstName = firsName;
+        user.LastName  = lasName;
+        var u = await userManager.CreateAsync(user,password);
+        if (u.Succeeded)
+        {
+            var r = await userManager.AddToRoleAsync(user, roleName);
+            if (!r.Succeeded)
+            {
+                await userManager.DeleteAsync(user);
+            }
+        }
+    }
+}
+
 app.Run();

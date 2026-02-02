@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BaseTemplate.Web.styles.css" asp-append-version="true" />
     <!--Css todos-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
@@ -36,6 +38,20 @@
             </div>
         </nav>
     </header>
+    <div class="dropdown position-fixed top-0 end-0 me-3 mt-2">
+        <a href="#" class="position-fixed top-0 end-0 me-3 mt-2" style="padding: 10px 16px; font-size: 1.5rem;" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="fa-solid fa-circle-user" style="font-size: 2rem;"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li class="px-3 py-2 text-center"><strong>@User.Identity.Name</strong></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" asp-controller="AccountApi" asp-action="Logout"><i class="fa-solid fa-door-open me-2"></i>
+                    Sign out
+                </a>
+            </li>
+        </ul>
+
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

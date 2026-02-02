@@ -27,7 +27,7 @@ namespace BaseTemplate.Web.Controllers.Api {
             return Unauthorized();
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout() { 
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
