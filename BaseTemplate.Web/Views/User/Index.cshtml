@@ -1,0 +1,114 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    <script asp-append-version="true" src="~/js/function/users.js"></script>
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="text-right">
+    <button type="button" class="btn btn-primary" onclick="openModal(null)"><i class="fas fa-plus"></i> Add New</button>
+</div>
+<br />
+
+<table id="tblUser" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Actions</th>
+            <th>User</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<!-- Modal -->
+
+<div class="modal fade" id="AddcomplianceModal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog .modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Compliance Tracking</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <input id="Compliance_Id" value="0" hidden />
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="CEmployee_Id">Employee:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control selectpicker" data-live-search="true" id="CEmployee_Id" name="Employee_Id" placeholder="Select Employee" title="Select Employee" autocomplete="off" tabindex="-98" data-original-title="">
+                                @* @foreach(var item in ViewBag.Employees) {
+                                    <option data-content="@item.Icon" value="@item.Value">
+                                        @item.Value
+                                    </option>
+                                } *@
+                            </select>
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="form-group text-right">
+                        <label class="col-sm-2 control-label" for="ComplianceType">Type:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="ComplianceType" name="ComplianceType">
+                                <option value="N/A">-- Select Type --</option>
+                                <option value="License">License</option>
+                                <option value="Certification">Certification</option>
+                                <option value="HIPAA">HIPAA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="form-group">
+                        @*<label class="col-sm-2 control-label" for="Document">Document:</label>
+                            <div class="col-sm-10">
+                                <input type="file" id="Document" name="Document" class="">
+                            </div>*@
+                        <label class="col-sm-2 control-label" for="Document">Document:</label>
+                        <div class="col-sm-10">
+                            <label class="btn btn-primary">
+                                Choose File
+                                <input type="file" style="display:none;" id="complianceDocument">
+                            </label>
+                            <span id="compliancefileName" style="margin-left:10px;">
+                                No file chosen
+                            </span>
+                        </div>
+                    </div>
+                    <br /><br />
+                    <!-- Next Due -->
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="control-label" for="NextDueDate">Next Due:</label>
+                            <input type="date" id="NextDueDate" name="NextDueDate" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label" for="CompletionDate">Completion:</label>
+                            <input type="date" id="CompletionDate" name="CompletionDate" class="form-control">
+                        </div>
+                    </div>
+                    <br /><br />
+                    <!-- Note -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label class="control-label" for="Notes">Note:</label>
+                            <textarea id="Notes" name="Notes" rows="3" class="form-control" placeholder="Add notes here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="SaveCompliance()"><i class="fas fa-save"></i> Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancel</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BaseTemplate.Core.Interface {
-    public interface IUserRepository : IRepository<UserModel> 
-    {
+    public interface IUserRepository : IRepository<UserModel> {
+        
     }
 }

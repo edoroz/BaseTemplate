@@ -16,8 +16,6 @@ builder.Services.AddControllersWithViews(options => {
     });
 });
 
-builder.Services.AddScoped<IWorkUnit, WorkUnit>();
-
 var connectionString = builder.Configuration.GetConnectionString("ConexionSQL") ?? 
     throw new InvalidOperationException("Connection string 'ConexionSQL' not found");
 builder.Services
@@ -49,6 +47,8 @@ builder.Services.ConfigureApplicationCookie(options => {
     options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     options.SlidingExpiration = true;
 });
+
+builder.Services.AddScoped<IWorkUnit, WorkUnit>();
 
 var app = builder.Build();
 
