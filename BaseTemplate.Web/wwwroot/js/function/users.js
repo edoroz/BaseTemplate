@@ -13,8 +13,14 @@ function GetUsers() {
             }
             $('#tblUser').DataTable({
                 responsive: true,
-                scrollX:true, lengthChange:false,
+                scrollX: true, lengthChange: false,
+                layout: { topStart: 'search', top: 'pageLength', topEnd: 'info', bottom: 'paging', bottomStart: 'paging', bottomEnd:'paging' },
                 data: result.data,
+                columnDefs: [
+                    { targets: 0, className: 'dt-center' },
+                    { targets: 1, className: 'dt-head-center' },
+                    { targets: -1, className: 'text-center'}
+                ],
                 columns: [
                     {
                         data: null,
